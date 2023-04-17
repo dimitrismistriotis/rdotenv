@@ -44,6 +44,10 @@ fn main() {
                 env::set_var(variable.trim(), value.trim());
             }
         }
+    } else {
+        eprintln!("");
+        eprintln!(".Env not found continuing wrapping without changing the environment");
+        eprintln!("");
     }
 
     // dbg!(args.clone());
