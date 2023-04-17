@@ -19,15 +19,7 @@ fn main() {
     let env_file = File::open(".env");
 
     if env_file.is_ok() {
-        let filtered_lines = read_and_filter_file(env_file.unwrap());
-        // println!("{}", filtered_lines.join("\n"));
-        for line_with_key_value in filtered_lines {
-            if let Some((variable, value)) = line_with_key_value.split_once('=') {
-                // println!("{} ---> {}", variable.trim(), value.trim());
-                // Add to environment:
-                env::set_var(variable.trim(), value.trim());
-            }
-        }
+        set_entries_to_environment(env_file);
     } else {
         eprintln!("");
         eprintln!(".Env not found continuing wrapping without changing the environment");
@@ -39,4 +31,16 @@ fn main() {
     let err = exec::Command::new(&args[0]).args(&args).exec();
     println!("Error: {}", err);
     process::exit(1);
+}
+
+fn set_entries_to_environment(env_file: Result<File, std::io::Error>) {
+    let filtered_lines = read_and_filter_file(env_file.unwrap());
+    // println!("{}", filtered_lines.join("\n"));
+    for line_with_key_value in filtered_lines {
+        if let Some((variable, value)) = line_with_key_value.split_once('=') {
+            // println!("{} ---> {}", variable.trim(), value.trim());
+            // Add to environment:
+            env::set_var(variable.trim(), value.trim());
+        }
+    }
 }
