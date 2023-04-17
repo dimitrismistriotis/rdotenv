@@ -12,6 +12,11 @@ fn main() {
         process::exit(1);
     }
 
+    //
+    // Add to environment:
+    //
+    env::set_var("TEST_ENVIRONMENT_VARIABLE", format!("ARGS_LENGTH_IS {}", args.len()));
+
     dbg!(args.clone());
 
     let err = exec::Command::new(&args[0]).args(&args).exec();
