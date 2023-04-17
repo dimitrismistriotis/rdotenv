@@ -1,0 +1,12 @@
+#!/bin/env bash
+set -eux
+
+echo ""
+echo "Listing current directory"
+echo ""
+ls -lah
+
+echo ""
+echo "Display environment"
+echo ""
+set
