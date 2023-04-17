@@ -1,23 +1,9 @@
 use std::env;
 use std::fs::File;
-use std::io::{prelude::*, BufReader};
 use std::process;
 
-
-// https://stackoverflow.com/questions/30801031/read-a-file-and-get-an-array-of-strings
-fn lines_from_file(file: File) -> Vec<String> {
-    let buf = BufReader::new(file);
-    buf.lines()
-        .map(|l| l.expect("Could not parse line"))
-        .collect()
-}
-
-fn filter_out_lines(all_lines: Vec<String>) -> Vec<String> {
-    all_lines.into_iter()
-        .filter(|line| !line.starts_with("#"))
-        .filter(|line| !line.is_empty())
-        .collect()
-}
+mod read_file;
+use read_file::read_and_filter_file;
 
 fn main() {
     //
@@ -33,9 +19,7 @@ fn main() {
     let env_file = File::open(".env");
 
     if env_file.is_ok() {
-        let lines = lines_from_file(env_file.unwrap());
-        // println!("{}", lines.join("\n"));
-        let filtered_lines = filter_out_lines(lines);
+        let filtered_lines = read_and_filter_file(env_file.unwrap());
         // println!("{}", filtered_lines.join("\n"));
         for line_with_key_value in filtered_lines {
             if let Some((variable, value)) = line_with_key_value.split_once('=') {
