@@ -1,5 +1,18 @@
 use std::env;
+use std::fs::File;
+use std::path::Path;
+use std::io::{prelude::*, BufReader};
 use std::process;
+
+
+// https://stackoverflow.com/questions/30801031/read-a-file-and-get-an-array-of-strings
+fn lines_from_file(filename: impl AsRef<Path>) -> Vec<String> {
+    let file = File::open(filename).expect("no such file");
+    let buf = BufReader::new(file);
+    buf.lines()
+        .map(|l| l.expect("Could not parse line"))
+        .collect()
+}
 
 fn main() {
     //
@@ -11,6 +24,10 @@ fn main() {
         println!("Please specify command to wrap and execute");
         process::exit(1);
     }
+
+
+    let lines = lines_from_file(".env");
+    println!("{}", lines.join(", "));
 
     //
     // Add to environment:
