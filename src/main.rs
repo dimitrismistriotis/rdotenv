@@ -26,7 +26,7 @@ fn main() {
     //
     let args: Vec<String> = env::args().skip(1).collect();
     if args.len() < 1 {
-        println!("Please specify command to wrap and execute");
+        eprintln!("Please specify command to wrap and execute");
         process::exit(1);
     }
 
