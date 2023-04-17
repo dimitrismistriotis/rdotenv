@@ -1,13 +1,11 @@
 use std::env;
 use std::fs::File;
-use std::path::Path;
 use std::io::{prelude::*, BufReader};
 use std::process;
 
 
 // https://stackoverflow.com/questions/30801031/read-a-file-and-get-an-array-of-strings
-fn lines_from_file(filename: impl AsRef<Path>) -> Vec<String> {
-    let file = File::open(filename).expect("no such file");
+fn lines_from_file(file: File) -> Vec<String> {
     let buf = BufReader::new(file);
     buf.lines()
         .map(|l| l.expect("Could not parse line"))
@@ -32,16 +30,24 @@ fn main() {
         process::exit(1);
     }
 
-    let lines = lines_from_file(".env");
-    // println!("{}", lines.join("\n"));
-    let filtered_lines = filter_out_lines(lines);
-    // println!("{}", filtered_lines.join("\n"));
-    for line_with_key_value in filtered_lines {
-        if let Some((variable, value)) = line_with_key_value.split_once('=') {
-            // println!("{} ---> {}", variable.trim(), value.trim());
-            // Add to environment:
-            env::set_var(variable.trim(), value.trim());
+    let env_file = File::open(".env");
+
+    if env_file.is_ok() {
+        let lines = lines_from_file(env_file.unwrap());
+        // println!("{}", lines.join("\n"));
+        let filtered_lines = filter_out_lines(lines);
+        // println!("{}", filtered_lines.join("\n"));
+        for line_with_key_value in filtered_lines {
+            if let Some((variable, value)) = line_with_key_value.split_once('=') {
+                // println!("{} ---> {}", variable.trim(), value.trim());
+                // Add to environment:
+                env::set_var(variable.trim(), value.trim());
+            }
         }
+    } else {
+        eprintln!("");
+        eprintln!(".Env not found continuing wrapping without changing the environment");
+        eprintln!("");
     }
 
     // dbg!(args.clone());
