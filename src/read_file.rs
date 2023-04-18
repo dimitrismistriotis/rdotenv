@@ -12,7 +12,7 @@ fn lines_from_file(file: File) -> Vec<String> {
 fn filter_out_lines(all_lines: Vec<String>) -> Vec<String> {
     all_lines.into_iter()
         .filter(|line| !line.starts_with("#"))
-        .filter(|line| !line.is_empty())
+        .filter(|line| !line.trim().is_empty())
         .collect()
 }
 
@@ -40,10 +40,9 @@ mod read_file_tests {
         assert!(filtered_lines.len() == 0);
     }
 
-
     #[test]
     fn test_filter_out_line_line_with_tabs() {
-        let input_lines = vec!["\t\t".to_string()];
+        let input_lines = vec!["\t\t  ".to_string()];
         let filtered_lines = super::filter_out_lines(input_lines);
 
         assert!(filtered_lines.len() == 0);
