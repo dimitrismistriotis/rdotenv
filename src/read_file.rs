@@ -25,6 +25,14 @@ pub fn read_and_filter_file(env_file: File) -> Vec<String> {
 #[cfg(test)]
 mod read_file_tests {
     #[test]
+    fn test_keep_line_with_content() {
+        let input_lines = vec!["SOMETHING=VALUE".to_string()];
+        let filtered_lines = super::filter_out_lines(input_lines);
+
+        assert!(filtered_lines.len() == 1);
+    }
+
+    #[test]
     fn test_filter_out_empty_line() {
         let input_lines = vec!["".to_string()];
         let filtered_lines = super::filter_out_lines(input_lines);
