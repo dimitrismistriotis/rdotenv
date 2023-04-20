@@ -22,7 +22,7 @@ fn main() {
         set_entries_to_environment(env_file);
     } else {
         eprintln!("");
-        eprintln!(".Env not found continuing wrapping without changing the environment");
+        eprintln!("File .env not found, continuing wrapping without changing the environment");
         eprintln!("");
     }
 
