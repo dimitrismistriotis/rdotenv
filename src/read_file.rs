@@ -11,7 +11,7 @@ fn lines_from_file(file: File) -> Vec<String> {
 
 fn filter_out_lines(all_lines: Vec<String>) -> Vec<String> {
     all_lines.into_iter()
-        .filter(|line| !line.starts_with("#"))
+        .filter(|line| !line.starts_with('#'))
         .filter(|line| !line.trim().is_empty())
         .collect()
 }
