@@ -37,7 +37,7 @@ mod read_file_tests {
         let input_lines = vec!["".to_string()];
         let filtered_lines = super::filter_out_lines(input_lines);
 
-        assert!(filtered_lines.len() == 0);
+        assert!(filtered_lines.is_empty());
     }
 
     #[test]
@@ -45,7 +45,7 @@ mod read_file_tests {
         let input_lines = vec!["  ".to_string()];
         let filtered_lines = super::filter_out_lines(input_lines);
 
-        assert!(filtered_lines.len() == 0);
+        assert!(filtered_lines.is_empty());
     }
 
     #[test]
@@ -53,6 +53,6 @@ mod read_file_tests {
         let input_lines = vec!["\t\t  ".to_string()];
         let filtered_lines = super::filter_out_lines(input_lines);
 
-        assert!(filtered_lines.len() == 0);
+        assert!(filtered_lines.is_empty());
     }
 }
