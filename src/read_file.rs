@@ -19,7 +19,7 @@ fn filter_out_lines(all_lines: Vec<String>) -> Vec<String> {
 pub fn read_and_filter_file(env_file: File) -> Vec<String> {
     let lines = lines_from_file(env_file);
     // println!("{}", lines.join("\n"));
-    return filter_out_lines(lines);
+    filter_out_lines(lines)
 }
 
 #[cfg(test)]
