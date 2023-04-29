@@ -11,7 +11,7 @@ fn main() {
     // https://github.com/faradayio/exec-rs/blob/master/examples/exec.rs
     //
     let args: Vec<String> = env::args().skip(1).collect();
-    if args.len() < 1 {
+    if args.is_empty() {
         eprintln!("Please specify command to wrap and execute");
         process::exit(1);
     }
