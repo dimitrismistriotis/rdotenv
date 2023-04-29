@@ -21,9 +21,9 @@ fn main() {
     if env_file.is_ok() {
         set_entries_to_environment(env_file);
     } else {
-        eprintln!("");
+        eprintln!();
         eprintln!("File .env not found, continuing wrapping without changing the environment");
-        eprintln!("");
+        eprintln!();
     }
 
     // dbg!(args.clone());
