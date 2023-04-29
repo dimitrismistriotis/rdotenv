@@ -11,7 +11,7 @@ fn main() {
     // https://github.com/faradayio/exec-rs/blob/master/examples/exec.rs
     //
     let args: Vec<String> = env::args().skip(1).collect();
-    if args.len() < 1 {
+    if args.is_empty() {
         eprintln!("Please specify command to wrap and execute");
         process::exit(1);
     }
@@ -21,9 +21,9 @@ fn main() {
     if env_file.is_ok() {
         set_entries_to_environment(env_file);
     } else {
-        eprintln!("");
+        eprintln!();
         eprintln!("File .env not found, continuing wrapping without changing the environment");
-        eprintln!("");
+        eprintln!();
     }
 
     // dbg!(args.clone());

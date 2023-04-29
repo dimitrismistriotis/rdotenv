@@ -1,0 +1,23 @@
+#
+# https://dev.to/wayofthepie/rust-and-github-actions-3kob
+#
+on: [push]
+name: build
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - name: build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+      - name: test
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+      - name: lint / Run Clippy
+        run: cargo clippy --all-targets --all-features
