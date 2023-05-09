@@ -5,3 +5,9 @@ edition = "2021"
 
 [dependencies]
 exec = "0.3.1"
+
+#
+# Advice from https://github.com/johnthagen/min-sized-rust
+#
+[profile.release]
+strip = true  # Automatically strip symbols from the binary.
