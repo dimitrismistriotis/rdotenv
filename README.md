@@ -9,3 +9,7 @@ Example run
 ```shell
 cargo run -- ./example_script | grep TEST_ENVIRONMENT
 ```
+
+## TODOs:
+
+<https://rust-cli.github.io/book/tutorial/packaging.html> Prepare for release and release.
